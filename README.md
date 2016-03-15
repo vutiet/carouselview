@@ -66,6 +66,11 @@ Developed By
 - Sayyam Mehmood
 - Muhammad Rehan
 
+Special Thanks
+--------
+
+This library uses code snippet from Jake Wharton's [ViewPagerIndicator][2] to display page indicator.
+
 License
 --------
 
@@ -81,6 +86,8 @@ License
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
+    
+    [1]:https://github.com/JakeWharton/ViewPagerIndicator
 
 
 
