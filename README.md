@@ -5,11 +5,11 @@ A simple yet flexible library to add carousel view in your android application.
 
 Download
 --------
-#Gradle:
+###Gradle:
 ```groovy
 compile 'com.synnapps:carouselview:0.0.1'
 ```
-#Maven:
+###Maven:
 ```xml
 <dependency>
   <groupId>com.synnapps</groupId>
@@ -22,7 +22,7 @@ compile 'com.synnapps:carouselview:0.0.1'
 Usage
 --------
 
-#Include following code in your layout:
+###Include following code in your layout:
 
 ```xml
     <com.synnapps.carouselview.CarouselView
@@ -32,7 +32,7 @@ Usage
         carousel:slideInterval="5000">
     </com.synnapps.carouselview.CarouselView>
 ```
-#Include following code in your activity:
+###Include following code in your activity:
 ```java
 public class SampleCarouselViewActivity extends AppCompatActivity {
 
