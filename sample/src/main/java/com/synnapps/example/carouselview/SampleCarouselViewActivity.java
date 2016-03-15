@@ -19,7 +19,7 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sample_carousel_view);
 
         carouselView = (CarouselView) findViewById(R.id.carouselView);
-        carouselView.setPageCount(5);
+        carouselView.setPageCount(sampleImages.length);
 
         carouselView.setImageListener(imageListener);
     }
