@@ -69,7 +69,7 @@ Developed By
 Special Thanks
 --------
 
-This library uses code snippet from Jake Wharton's [ViewPagerIndicator][1] to display page indicator.
+This library uses code snippet from Jake Wharton's [ViewPagerIndicator](https://github.com/JakeWharton/ViewPagerIndicator) to display page indicator.
 
 License
 --------
@@ -87,7 +87,6 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     
-    [1]: https://github.com/JakeWharton/ViewPagerIndicator
 
 
 
