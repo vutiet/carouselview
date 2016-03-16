@@ -33,12 +33,15 @@ Usage
 
 ```xml
     <com.synnapps.carouselview.CarouselView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/carouselView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        app:slideInterval="5000">
-    </com.synnapps.carouselview.CarouselView>
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:fillColor="#FFFFFFFF"
+        app:pageColor="#00000000"
+        app:radius="6dp"
+        app:slideInterval="3000"
+        app:strokeColor="#FF777777"
+        app:strokeWidth="1dp"/>
 ```
 ####Include following code in your activity:
 ```java

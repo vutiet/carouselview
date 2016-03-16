@@ -3,6 +3,7 @@ package com.synnapps.carouselview;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -10,9 +11,9 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,7 +21,11 @@ import java.util.TimerTask;
 /**
  * Created by Sayyam on 11/25/15.
  */
-public class CarouselView extends FrameLayout {
+public class CarouselView extends RelativeLayout {
+
+    public static final int POSITION_LEFT = 0;
+    public static final int POSITION_RIGHT = 1;
+    public static final int POSITION_CENTER = 2;
 
     private final int DEFAULT_SLIDE_INTERVAL = 3500;
 
@@ -63,34 +68,48 @@ public class CarouselView extends FrameLayout {
             //Retrieve styles attributes
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CarouselView, defStyleAttr, 0);
             try {
-                slideInterval = a.getInt(R.styleable.CarouselView_slideInterval, DEFAULT_SLIDE_INTERVAL);
-                mPosition = a.getInt(R.styleable.CarouselView_indicatorPosition, 1);
-                mIndicator.setCentered(true);
-                mIndicator.setOrientation(a.getInt(R.styleable.CarouselView_android_orientation, LinearLayout.HORIZONTAL));
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    mIndicator.setBackground(a.getDrawable(R.styleable.CarouselView_android_background));
-                } else {
-                    mIndicator.setBackgroundDrawable(a.getDrawable(R.styleable.CarouselView_android_background));
+                setSlideInterval(a.getInt(R.styleable.CarouselView_slideInterval, DEFAULT_SLIDE_INTERVAL));
+                setOrientation(a.getInt(R.styleable.CarouselView_indicatorOrientation, LinearLayout.HORIZONTAL));
+                setPosition(a.getInt(R.styleable.CarouselView_indicatorPosition, 1));
+                int fillColor = a.getColor(R.styleable.CarouselView_fillColor, 0);
+                if (fillColor != 0) {
+                    setFillColor(fillColor);
                 }
-                mIndicator.setFillColor(a.getColor(R.styleable.CarouselView_indicatorFillColor, 0));
-                mIndicator.setPageColor(a.getColor(R.styleable.CarouselView_indicatorPageColor, 0));
-                mIndicator.setRadius(a.getFloat(R.styleable.CarouselView_indicatorRadius, 0));
-                mIndicator.setSnap(a.getBoolean(R.styleable.CarouselView_indicatorSnap, false));
-                mIndicator.setRadius(a.getFloat(R.styleable.CarouselView_indicatorRadius, 0));
-                mIndicator.setStrokeWidth(a.getFloat(R.styleable.CarouselView_indicatorStrokeWidth, 0));
-                mIndicator.setStrokeColor(a.getColor(R.styleable.CarouselView_indicatorStrokeColor, 0));
+                int pageColor = a.getColor(R.styleable.CarouselView_pageColor, 0);
+                if (pageColor != 0) {
+                    setPageColor(pageColor);
+                }
+                float radius = a.getDimensionPixelSize(R.styleable.CarouselView_radius, 0);
+                if (radius != 0) {
+                    setRadius(radius);
+                }
+                setSnap(a.getBoolean(R.styleable.CarouselView_snap, getResources().getBoolean(R.bool.default_circle_indicator_snap)));
+                int strokeColor = a.getColor(R.styleable.CarouselView_strokeColor, 0);
+                if (strokeColor != 0) {
+                    setStrokeColor(strokeColor);
+                }
+                float strokeWidth = a.getDimensionPixelSize(R.styleable.CarouselView_strokeWidth, 0);
+                if (strokeWidth != 0) {
+                    setStrokeWidth(strokeWidth);
+                }
             } finally {
                 a.recycle();
             }
         }
     }
 
+    public int getSlideInterval() {
+        return slideInterval;
+    }
+
+    public void setSlideInterval(int slideInterval) {
+        this.slideInterval = slideInterval;
+    }
+
     public void setData() {
         CarouselPagerAdapter carouselPagerAdapter = new CarouselPagerAdapter(getContext());
         containerViewPager.setAdapter(carouselPagerAdapter);
-
         mIndicator.setViewPager(containerViewPager);
-
         Timer swipeTimer = new Timer();
         swipeTimer.schedule(new SwipeTask(), slideInterval, slideInterval);
     }
@@ -107,12 +126,10 @@ public class CarouselView extends FrameLayout {
             ImageView imageView = new ImageView(mContext);
             imageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));  //setting image position
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-
-            //Picasso.with(mContext).load(imagesURL[position]).placeholder(IMAGE_PLACE_HOLDER).fit().centerCrop().into(imageView);    //setting placeholder image resource and image from URL
-
+            if (mImageListener == null) {
+                throw new RuntimeException("View must implement " + ImageListener.class.getSimpleName());
+            }
             mImageListener.setImageForPosition(position, imageView);
-
             collection.addView(imageView);
             return imageView;
         }
@@ -154,5 +171,100 @@ public class CarouselView extends FrameLayout {
     public void setPageCount(int mPageCount) {
         this.mPageCount = mPageCount;
         setData();
+    }
+
+    public void addOnPageChangeListener(ViewPager.OnPageChangeListener listener) {
+        containerViewPager.addOnPageChangeListener(listener);
+    }
+
+    public void setCurrentItem(int item) {
+        containerViewPager.setCurrentItem(item);
+    }
+
+    public int getPosition() {
+        return mPosition;
+    }
+
+    public void setPosition(int position) {
+        mPosition = position;
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mIndicator.getLayoutParams();
+        switch (mPosition) {
+            case POSITION_LEFT:
+                params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                break;
+            case POSITION_RIGHT:
+                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                break;
+            case POSITION_CENTER:
+                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                break;
+            default:
+                throw new IllegalArgumentException("Position must be from LEFT, RIGHT or CENTER.");
+        }
+    }
+
+    public int getOrientation() {
+        return mIndicator.getOrientation();
+    }
+
+    public int getFillColor() {
+        return mIndicator.getFillColor();
+    }
+
+    public int getStrokeColor() {
+        return mIndicator.getStrokeColor();
+    }
+
+    public void setSnap(boolean snap) {
+        mIndicator.setSnap(snap);
+    }
+
+    public void setRadius(float radius) {
+        mIndicator.setRadius(radius);
+    }
+
+    public float getStrokeWidth() {
+        return mIndicator.getStrokeWidth();
+    }
+
+    @Override
+    public void setBackground(Drawable background) {
+        super.setBackground(background);
+    }
+
+    public Drawable getIndicatorBackground() {
+        return mIndicator.getBackground();
+    }
+
+    public void setFillColor(int fillColor) {
+        mIndicator.setFillColor(fillColor);
+    }
+
+    public int getPageColor() {
+        return mIndicator.getPageColor();
+    }
+
+    public void setOrientation(int orientation) {
+        mIndicator.setOrientation(orientation);
+    }
+
+    public boolean isSnap() {
+        return mIndicator.isSnap();
+    }
+
+    public void setStrokeColor(int strokeColor) {
+        mIndicator.setStrokeColor(strokeColor);
+    }
+
+    public float getRadius() {
+        return mIndicator.getRadius();
+    }
+
+    public void setPageColor(int pageColor) {
+        mIndicator.setPageColor(pageColor);
+    }
+
+    public void setStrokeWidth(float strokeWidth) {
+        mIndicator.setStrokeWidth(strokeWidth);
     }
 }

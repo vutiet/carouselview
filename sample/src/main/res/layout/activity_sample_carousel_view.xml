@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:carousel="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SampleCarouselViewActivity">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".SampleCarouselViewActivity">
 
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/carouselView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        carousel:slideInterval="3000"></com.synnapps.carouselview.CarouselView>
-
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:fillColor="#FFFFFFFF"
+        app:pageColor="#00000000"
+        app:radius="6dp"
+        app:slideInterval="3000"
+        app:strokeColor="#FF777777"
+        app:strokeWidth="1dp"/>
 
     <TextView
-        android:layout_below="@+id/carouselView"
         android:layout_width="fill_parent"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:textSize="18sp"
         android:layout_height="wrap_content"
-        android:text="Yummy Fruits"
+        android:layout_below="@+id/carouselView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@android:color/black"/>
+        android:gravity="center_horizontal"
+        android:text="Yummy Fruits"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"/>
 
 </RelativeLayout>
