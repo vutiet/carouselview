@@ -2,12 +2,12 @@
 
 CarouselView
 =======
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CarouselView-green.svg?style=true)](https://android-arsenal.com/details/1/3289)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CarouselView-green.svg?style=true)](https://android-arsenal.com/details/1/3289){:target="_blank"}
 
 A simple yet flexible library to add carousel view in your android application.
 
 
-<img src="/sample/src/main/assets/carousel_gif.gif" title="sample" width="378" height="600"  />
+<img src="/sample/src/main/assets/carousel_gif.gif" title="sample" width="378" height="600" />
 
 
 Download
