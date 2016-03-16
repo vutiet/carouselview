@@ -26,10 +26,11 @@ Usage
 
 ```xml
     <com.synnapps.carouselview.CarouselView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/carouselView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        carousel:slideInterval="5000">
+        app:slideInterval="5000">
     </com.synnapps.carouselview.CarouselView>
 ```
 ####Include following code in your activity:
@@ -74,7 +75,7 @@ This library uses code snippet from Jake Wharton's [ViewPagerIndicator](https://
 License
 --------
 
-    Copyright 2013 Square, Inc.
+    Copyright 2016 Synnapps, Pvt Ltd.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -86,9 +87,3 @@ License
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
-    
-
-
-
-
-
