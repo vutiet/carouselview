@@ -4,17 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SampleCarouselViewActivity">
 
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/carouselView"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        carousel:slideInterval="5000">
-    </com.synnapps.carouselview.CarouselView>
+        android:layout_height="wrap_content"
+        carousel:slideInterval="3000"></com.synnapps.carouselview.CarouselView>
+
+
+    <TextView
+        android:layout_below="@+id/carouselView"
+        android:layout_width="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        android:text="Yummy Fruits"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@android:color/black"/>
 
 </RelativeLayout>
