@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -25,11 +26,10 @@ public class CarouselView extends FrameLayout {
 
     private int mPageCount;
     private int slideInterval = DEFAULT_SLIDE_INTERVAL;
+    private int mPosition = 1;
 
     private ViewPager containerViewPager;
-
-    private PageIndicator mIndicator;
-
+    private CirclePageIndicator mIndicator;
     private ImageListener mImageListener;
 
     public CarouselView(Context context) {
@@ -57,14 +57,31 @@ public class CarouselView extends FrameLayout {
             return;
         } else {
             View view = LayoutInflater.from(context).inflate(R.layout.view_carousel, this, true);
-//            ButterKnife.inject(this);
             containerViewPager = (ViewPager) view.findViewById(R.id.containerViewPager);
             mIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
 
             //Retrieve styles attributes
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CarouselView, defStyleAttr, 0);
-
-            slideInterval = a.getInt(R.styleable.CirclePageIndicator_android_orientation, DEFAULT_SLIDE_INTERVAL);
+            try {
+                slideInterval = a.getInt(R.styleable.CarouselView_slideInterval, DEFAULT_SLIDE_INTERVAL);
+                mPosition = a.getInt(R.styleable.CarouselView_indicatorPosition, 1);
+                mIndicator.setCentered(true);
+                mIndicator.setOrientation(a.getInt(R.styleable.CarouselView_android_orientation, LinearLayout.HORIZONTAL));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    mIndicator.setBackground(a.getDrawable(R.styleable.CarouselView_android_background));
+                } else {
+                    mIndicator.setBackgroundDrawable(a.getDrawable(R.styleable.CarouselView_android_background));
+                }
+                mIndicator.setFillColor(a.getColor(R.styleable.CarouselView_indicatorFillColor, 0));
+                mIndicator.setPageColor(a.getColor(R.styleable.CarouselView_indicatorPageColor, 0));
+                mIndicator.setRadius(a.getFloat(R.styleable.CarouselView_indicatorRadius, 0));
+                mIndicator.setSnap(a.getBoolean(R.styleable.CarouselView_indicatorSnap, false));
+                mIndicator.setRadius(a.getFloat(R.styleable.CarouselView_indicatorRadius, 0));
+                mIndicator.setStrokeWidth(a.getFloat(R.styleable.CarouselView_indicatorStrokeWidth, 0));
+                mIndicator.setStrokeColor(a.getColor(R.styleable.CarouselView_indicatorStrokeColor, 0));
+            } finally {
+                a.recycle();
+            }
         }
     }
 
