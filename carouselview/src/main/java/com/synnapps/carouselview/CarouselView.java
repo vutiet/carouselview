@@ -89,6 +89,8 @@ public class CarouselView extends FrameLayout {
         public Object instantiateItem(ViewGroup collection, int position) {
             ImageView imageView = new ImageView(mContext);
             imageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));  //setting image position
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
 
             //Picasso.with(mContext).load(imagesURL[position]).placeholder(IMAGE_PLACE_HOLDER).fit().centerCrop().into(imageView);    //setting placeholder image resource and image from URL
 
