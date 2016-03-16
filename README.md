@@ -14,14 +14,14 @@ Download
 --------
 ####Gradle:
 ```groovy
-compile 'com.synnapps:carouselview:0.0.1'
+compile 'com.synnapps:carouselview:0.0.2'
 ```
 ####Maven:
 ```xml
 <dependency>
   <groupId>com.synnapps</groupId>
   <artifactId>carouselview</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <type>pom</type>
 </dependency>
 ```
@@ -85,7 +85,7 @@ This library uses code snippet from Jake Wharton's [ViewPagerIndicator](https://
 License
 --------
 
-    Copyright 2016 Synnapps, Pvt Ltd.
+    Copyright 2016 Sayyam.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
