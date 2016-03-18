@@ -35,8 +35,8 @@ public class CarouselView extends RelativeLayout {
 
     private ViewPager containerViewPager;
     private CirclePageIndicator mIndicator;
-    private ViewListener mViewListener;
-    private ImageListener mImageListener;
+    private ViewListener mViewListener = null;
+    private ImageListener mImageListener = null;
 
     public CarouselView(Context context) {
         super(context);
@@ -103,6 +103,10 @@ public class CarouselView extends RelativeLayout {
         return slideInterval;
     }
 
+    /**
+     * Set interval for one slide in milliseconds.
+     * @param slideInterval milliseconds
+     */
     public void setSlideInterval(int slideInterval) {
         this.slideInterval = slideInterval;
     }
@@ -145,12 +149,11 @@ public class CarouselView extends RelativeLayout {
                 View view = mViewListener.setViewForPosition(position);
 
                 if (null != view) {
+                    objectToReturn = view;
                     collection.addView(view);
                 } else {
                     throw new RuntimeException("View can not be null for position " + position);
                 }
-
-                objectToReturn = collection;
 
             } else {
                 throw new RuntimeException("View must set " + ImageListener.class.getSimpleName() + " or " + ViewListener.class.getSimpleName() + ".");
