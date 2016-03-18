@@ -14,14 +14,14 @@ Download
 --------
 ####Gradle:
 ```groovy
-compile 'com.synnapps:carouselview:0.0.2'
+compile 'com.synnapps:carouselview:0.0.3'
 ```
 ####Maven:
 ```xml
 <dependency>
   <groupId>com.synnapps</groupId>
   <artifactId>carouselview</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
   <type>pom</type>
 </dependency>
 ```
@@ -70,6 +70,38 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
     };
 
 }
+```
+
+####If you want to add custom view, implement ```ViewListener```.
+```java
+
+public class SampleCarouselViewActivity extends AppCompatActivity {
+
+    CarouselView customCarouselView;
+    int NUMBER_OF_PAGES = 5;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sample_carousel_view);
+
+        customCarouselView = (CarouselView) findViewById(R.id.customCarouselView);
+        customCarouselView.setPageCount(NUMBER_OF_PAGES);
+        // set ViewListener for custom view 
+        customCarouselView.setViewListener(viewListener);
+    }
+
+    ViewListener viewListener = new ViewListener() {
+    
+        @Override
+        public View setViewForPosition(int position) {
+            View customView = getLayoutInflater().inflate(R.layout.view_custom, null);
+            //set view attributes here
+            
+            return customView;
+        }
+    };
+
 ```
 
 Developed By
