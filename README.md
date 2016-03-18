@@ -7,7 +7,7 @@ CarouselView
 A simple yet flexible library to add carousel view in your android application.
 
 
-<img src="/sample/src/main/assets/carousel_gif.gif" title="sample" width="378" height="600" />
+<img src="/sample/src/main/assets/carousel_gif.gif" title="sample" width="500" height="460" />
 
 
 Download
