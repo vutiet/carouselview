@@ -35,6 +35,7 @@ public class CarouselView extends RelativeLayout {
 
     private ViewPager containerViewPager;
     private CirclePageIndicator mIndicator;
+    private ViewListener mViewListener;
     private ImageListener mImageListener;
 
     public CarouselView(Context context) {
@@ -123,15 +124,39 @@ public class CarouselView extends RelativeLayout {
 
         @Override
         public Object instantiateItem(ViewGroup collection, int position) {
-            ImageView imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));  //setting image position
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            if (mImageListener == null) {
-                throw new RuntimeException("View must implement " + ImageListener.class.getSimpleName());
+
+            Object objectToReturn;
+
+            //Either let user set image to ImageView
+            if (mImageListener != null) {
+
+                ImageView imageView = new ImageView(mContext);
+                imageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));  //setting image position
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+                objectToReturn = imageView;
+                mImageListener.setImageForPosition(position, imageView);
+
+                collection.addView(imageView);
+
+                //Or let user add his own ViewGroup
+            } else if (mViewListener != null) {
+
+                View view = mViewListener.setViewForPosition(position);
+
+                if (null != view) {
+                    collection.addView(view);
+                } else {
+                    throw new RuntimeException("View can not be null for position " + position);
+                }
+
+                objectToReturn = collection;
+
+            } else {
+                throw new RuntimeException("View must set " + ImageListener.class.getSimpleName() + " or " + ViewListener.class.getSimpleName() + ".");
             }
-            mImageListener.setImageForPosition(position, imageView);
-            collection.addView(imageView);
-            return imageView;
+
+            return objectToReturn;
         }
 
         @Override
@@ -162,6 +187,10 @@ public class CarouselView extends RelativeLayout {
 
     public void setImageListener(ImageListener mImageListener) {
         this.mImageListener = mImageListener;
+    }
+
+    public void setViewListener(ViewListener mViewListener) {
+        this.mViewListener = mViewListener;
     }
 
     public int getPageCount() {
@@ -199,7 +228,7 @@ public class CarouselView extends RelativeLayout {
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 break;
             default:
-                throw new IllegalArgumentException("Position must be from LEFT, RIGHT or CENTER.");
+                throw new IllegalArgumentException("Position must be LEFT, RIGHT or CENTER.");
         }
     }
 
