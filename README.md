@@ -115,7 +115,7 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 | app:pageColor | Color of the filled circles that represents pages. | color |
 | app:radius | Radius of the circles. This is also the spacing between circles.  | dimension |
 | app:snap | Whether or not the selected indicator snaps to the circles. | boolean |
-| app:strokeColor | Width of the stroke used to draw the circles. |color |
+| app:strokeColor | Width of the stroke used to draw the circles. | color |
 
 Note: Add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` in root view.
 
