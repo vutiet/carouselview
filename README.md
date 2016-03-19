@@ -104,7 +104,7 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 
 ```
 
-##Supported xml Attributes
+####Supported xml Attributes
 
 | Attribute          	   | Description          							   			  		| Values 				|
 | -------------------------|--------------------------------------------------------------------|-----------------------|		
@@ -117,7 +117,7 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 | app:snap 				   | Whether or not the selected indicator snaps to the circles. 		| boolean 				|
 | app:strokeColor 		   | Width of the stroke used to draw the circles. 						| color 				|
 
-Note: Add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` in root view.
+Note: Add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` in your layout's root view.
 
 
 Developed By
