@@ -106,18 +106,18 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 
 ####Supported xml Attributes
 
-| Attribute          	   | Description          							   			  		| Values 				|
-| -------------------------|--------------------------------------------------------------------|-----------------------|		
-| app:slideInterval 	   | Interval per page in milliseconds. 			   		      		| integer				|
-| app:indicatorPosition    | Position of the indicator. 					   			  		| left, right, center 	|
-| app:indicatorOrientation | Orientation of the indicator. 					   			  		| horizontal, vertical 	|
-| app:fillColor	  		   | Color of the filled circle that represents the current page. 		| color 				|
-| app:pageColor   		   | Color of the filled circles that represents pages. 		  		| color 				|
-| app:radius 			   | Radius of the circles. This is also the spacing between circles.   | dimension 			|
-| app:snap 				   | Whether or not the selected indicator snaps to the circles. 		| boolean 				|
-| app:strokeColor 		   | Width of the stroke used to draw the circles. 						| color 				|
+| Attribute          	   | Description          							   			  		| Values 				 |
+| -------------------------|:-------------------------------------------------------------------|------------------------|		
+| app:slideInterval 	   | Interval per page in milliseconds. 			   		      		| integer				 |
+| app:indicatorPosition    | Position of the indicator. 					   			  		| [left, right, center]  |
+| app:indicatorOrientation | Orientation of the indicator. 					   			  		| [horizontal, vertical] |
+| app:fillColor	  		   | Color of the filled circle that represents the current page. 		| color 				 |
+| app:pageColor   		   | Color of the filled circles that represents pages. 		  		| color 				 |
+| app:radius 			   | Radius of the circles. This is also the spacing between circles.   | dimension 			 |
+| app:snap 				   | Whether or not the selected indicator snaps to the circles. 		| boolean 				 |
+| app:strokeColor 		   | Width of the stroke used to draw the circles. 						| color 				 |
 
-Note: Add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` in your layout's root view.
+_Note:_ Add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` in your layout's root view.
 
 
 Developed By
