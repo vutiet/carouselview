@@ -25,10 +25,12 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 
         carouselView = (CarouselView) findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
+        carouselView.setSlideInterval(0);
+
 
         customCarouselView = (CarouselView) findViewById(R.id.customCarouselView);
         customCarouselView.setPageCount(sampleImages.length);
-        customCarouselView.setSlideInterval(5000);
+        customCarouselView.setSlideInterval(6000);
 
         //carouselView.setImageListener(imageListener);
         carouselView.setImageListener(imageListener);
@@ -60,10 +62,5 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
             return customView;
         }
     };
-
-    class Holder {
-        TextView labelTextView;
-        ImageView fruitImageView;
-    }
 
 }

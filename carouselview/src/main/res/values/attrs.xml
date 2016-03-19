@@ -7,25 +7,31 @@
     </declare-styleable>
 
     <attr name="centered" format="boolean"/>
-    <attr name="selectedColor" format="color"/>
     <attr name="strokeWidth" format="dimension"/>
-    <attr name="unselectedColor" format="color"/>
-
     <attr name="slideInterval" format="integer"/>
+
+    <!--<attr name="selectedColor" format="color"/>-->
+    <!--<attr name="unselectedColor" format="color"/>-->
+
     <attr name="indicatorPosition">
         <enum name="left" value="0"/>
         <enum name="right" value="1"/>
         <enum name="center" value="2"/>
     </attr>
+
     <attr name="indicatorOrientation">
         <enum name="horizontal" value="0"/>
         <enum name="vertical" value="1"/>
     </attr>
+
     <attr name="fillColor" format="color"/>
     <attr name="pageColor" format="color"/>
     <attr name="radius" format="dimension"/>
     <attr name="snap" format="boolean"/>
     <attr name="strokeColor" format="color"/>
+    <attr name="autoScroll" format="boolean"/>
+    <attr name="disableAutoScrollOnUserInteraction" format="boolean"/>
+
 
     <declare-styleable name="CirclePageIndicator">
         <!-- Whether or not the indicators should be centered. -->
@@ -67,6 +73,12 @@
         <attr name="strokeColor"/>
         <!-- Width of the stroke used to draw the circles. -->
         <attr name="strokeWidth"/>
+        <!-- Enable/Disable auto scrolling of views. default: true -->
+        <attr name="autoScroll"/>
+        <!-- Disables auto scrolling when user interacts. default: false -->
+        <attr name="disableAutoScrollOnUserInteraction"/>
+
+
     </declare-styleable>
 
 </resources>

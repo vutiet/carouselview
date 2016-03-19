@@ -38,6 +38,14 @@ public class CarouselView extends RelativeLayout {
     private ViewListener mViewListener = null;
     private ImageListener mImageListener = null;
 
+    private Timer swipeTimer;
+    private SwipeTask swipeTask;
+
+    private boolean autoScroll;
+    private boolean disableAutoScrollOnUserInteraction;
+    private boolean userInitiatedScroll;
+    private int previousState;
+
     public CarouselView(Context context) {
         super(context);
     }
@@ -66,6 +74,8 @@ public class CarouselView extends RelativeLayout {
             containerViewPager = (ViewPager) view.findViewById(R.id.containerViewPager);
             mIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
 
+            containerViewPager.addOnPageChangeListener(carouselOnPageChangeListener);
+
             //Retrieve styles attributes
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CarouselView, defStyleAttr, 0);
             try {
@@ -73,6 +83,9 @@ public class CarouselView extends RelativeLayout {
                 setOrientation(a.getInt(R.styleable.CarouselView_indicatorOrientation, LinearLayout.HORIZONTAL));
                 setPosition(a.getInt(R.styleable.CarouselView_indicatorPosition, 1));
                 int fillColor = a.getColor(R.styleable.CarouselView_fillColor, 0);
+                setAutoScroll(a.getBoolean(R.styleable.CarouselView_autoScroll, true));
+                setDisableAutoScrollOnUserInteraction(a.getBoolean(R.styleable.CarouselView_disableAutoScrollOnUserInteraction, false));
+
                 if (fillColor != 0) {
                     setFillColor(fillColor);
                 }
@@ -105,19 +118,87 @@ public class CarouselView extends RelativeLayout {
 
     /**
      * Set interval for one slide in milliseconds.
+     *
      * @param slideInterval milliseconds
      */
     public void setSlideInterval(int slideInterval) {
         this.slideInterval = slideInterval;
     }
 
+    /**
+     * Set interval for one slide in milliseconds.
+     *
+     * @param slideInterval milliseconds
+     */
+    public void reSetSlideInterval(int slideInterval) {
+        this.slideInterval = slideInterval;
+
+        if (null != containerViewPager) {
+            startScrolling();
+        }
+    }
+
+    public boolean isAutoScroll() {
+        return autoScroll;
+    }
+
+    private void setAutoScroll(boolean autoScroll) {
+        this.autoScroll = autoScroll;
+    }
+
+    public boolean isDisableAutoScrollOnUserInteraction() {
+        return disableAutoScrollOnUserInteraction;
+    }
+
+    private void setDisableAutoScrollOnUserInteraction(boolean disableAutoScrollOnUserInteraction) {
+        this.disableAutoScrollOnUserInteraction = disableAutoScrollOnUserInteraction;
+    }
+
     public void setData() {
         CarouselPagerAdapter carouselPagerAdapter = new CarouselPagerAdapter(getContext());
         containerViewPager.setAdapter(carouselPagerAdapter);
         mIndicator.setViewPager(containerViewPager);
-        Timer swipeTimer = new Timer();
-        swipeTimer.schedule(new SwipeTask(), slideInterval, slideInterval);
+
+        startScrolling();
     }
+
+    private void stopScrollTimer() {
+
+        if (null != swipeTimer) {
+            swipeTimer.cancel();
+        }
+
+        if (null != swipeTask) {
+            swipeTask.cancel();
+        }
+    }
+
+
+    private void resetScrollTimer() {
+
+        stopScrollTimer();
+
+        swipeTask = new SwipeTask();
+        swipeTimer = new Timer();
+
+    }
+
+    private void startScrolling() {
+
+        resetScrollTimer();
+
+        if (autoScroll && slideInterval > 0 && containerViewPager.getAdapter() != null && containerViewPager.getAdapter().getCount() > 1) {
+
+            swipeTimer.schedule(swipeTask, slideInterval, slideInterval);
+        }
+    }
+
+    private void stopScrolling() {
+
+        resetScrollTimer();
+
+    }
+
 
     private class CarouselPagerAdapter extends PagerAdapter {
         private Context mContext;
@@ -178,6 +259,45 @@ public class CarouselView extends RelativeLayout {
         }
     }
 
+    ViewPager.OnPageChangeListener carouselOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            //Programmatic scroll
+            userInitiatedScroll = false;
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+            //User initiated scroll
+
+            if (previousState == ViewPager.SCROLL_STATE_DRAGGING
+                    && state == ViewPager.SCROLL_STATE_SETTLING) {
+                userInitiatedScroll = true;
+
+                if (disableAutoScrollOnUserInteraction) {
+                    stopScrolling();
+                } else {
+                    startScrolling();
+                }
+
+            } else if (previousState == ViewPager.SCROLL_STATE_SETTLING
+                    && state == ViewPager.SCROLL_STATE_IDLE) {
+                userInitiatedScroll = false;
+            }
+
+            previousState = state;
+
+        }
+    };
+
     private class SwipeTask extends TimerTask {
         public void run() {
             containerViewPager.post(new Runnable() {
@@ -234,6 +354,7 @@ public class CarouselView extends RelativeLayout {
                 throw new IllegalArgumentException("Position must be LEFT, RIGHT or CENTER.");
         }
     }
+
 
     public int getOrientation() {
         return mIndicator.getOrientation();

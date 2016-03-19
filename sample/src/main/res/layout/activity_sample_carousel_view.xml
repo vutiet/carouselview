@@ -13,7 +13,8 @@
         app:fillColor="#FFFFFFFF"
         app:pageColor="#00000000"
         app:radius="6dp"
-        app:slideInterval="3000"
+        app:slideInterval="4000"
+        app:autoScroll="false"
         app:strokeColor="#FF777777"
         app:strokeWidth="1dp" />
 
@@ -38,6 +39,7 @@
         android:layout_below="@+id/carouselLabel"
         android:layout_marginTop="20dp"
         app:fillColor="#FFFFFFFF"
+        app:disableAutoScrollOnUserInteraction="true"
         app:pageColor="#00000000"
         app:radius="6dp"
         app:strokeColor="#FF777777"
