@@ -117,6 +117,13 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 | app:snap | Whether or not the selected indicator snaps to the circles. | boolean |
 | app:strokeColor | Width of the stroke used to draw the circles. | color |
 
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
 Note: Add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` in root view.
 
 
