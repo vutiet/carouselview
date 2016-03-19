@@ -43,7 +43,6 @@ public class CarouselView extends RelativeLayout {
 
     private boolean autoPlay;
     private boolean disableAutoPlayOnUserInteraction;
-    private boolean userInitiatedScroll;
     private int previousState;
 
     public CarouselView(Context context) {
@@ -270,7 +269,6 @@ public class CarouselView extends RelativeLayout {
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             //Programmatic scroll
-            userInitiatedScroll = false;
 
         }
 
@@ -286,7 +284,6 @@ public class CarouselView extends RelativeLayout {
 
             if (previousState == ViewPager.SCROLL_STATE_DRAGGING
                     && state == ViewPager.SCROLL_STATE_SETTLING) {
-                userInitiatedScroll = true;
 
                 if (disableAutoPlayOnUserInteraction) {
                     pauseCarousel();
@@ -296,7 +293,6 @@ public class CarouselView extends RelativeLayout {
 
             } else if (previousState == ViewPager.SCROLL_STATE_SETTLING
                     && state == ViewPager.SCROLL_STATE_IDLE) {
-                userInitiatedScroll = false;
             }
 
             previousState = state;
