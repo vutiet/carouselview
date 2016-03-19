@@ -7,7 +7,7 @@ CarouselView
 A simple yet flexible library to add carousel view in your android application.
 
 
-<img src="/sample/src/main/assets/carousel_gif.gif" title="sample" width="378" height="600" />
+<img src="/sample/src/main/assets/carousel_gif.gif" title="sample" width="500" height="460" />
 
 
 Download
@@ -71,6 +71,56 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 
 }
 ```
+
+####If you want to add custom view, implement ```ViewListener```.
+```java
+
+public class SampleCarouselViewActivity extends AppCompatActivity {
+
+    CarouselView customCarouselView;
+    int NUMBER_OF_PAGES = 5;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sample_carousel_view);
+
+        customCarouselView = (CarouselView) findViewById(R.id.customCarouselView);
+        customCarouselView.setPageCount(NUMBER_OF_PAGES);
+        // set ViewListener for custom view 
+        customCarouselView.setViewListener(viewListener);
+    }
+
+    ViewListener viewListener = new ViewListener() {
+    
+        @Override
+        public View setViewForPosition(int position) {
+            View customView = getLayoutInflater().inflate(R.layout.view_custom, null);
+            //set view attributes here
+            
+            return customView;
+        }
+    };
+
+```
+
+####Supported xml Attributes
+
+| Attribute          	                    | Description          							   			  		 | Values 				  |
+| ------------------------------------------|:-------------------------------------------------------------------|------------------------|
+| app:slideInterval 	                    | Interval per page in milliseconds. 			   		      		 | integer				  |
+| app:indicatorPosition                     | Position of the indicator. 					   			  		 | [left, right, center]  |
+| app:indicatorOrientation                  | Orientation of the indicator. 					   			  	 | [horizontal, vertical] |
+| app:fillColor	  		                    | Color of the filled circle that represents the current page. 		 | color 				  |
+| app:pageColor   		                    | Color of the filled circles that represents pages. 		  		 | color 				  |
+| app:radius 			                    | Radius of the circles. This is also the spacing between circles.   | dimension 			  |
+| app:snap 				                    | Whether or not the selected indicator snaps to the circles. 		 | boolean 				  |
+| app:strokeColor 		                    | Width of the stroke used to draw the circles. 					 | color 				  |
+| app:autoScroll                            | Whether or not to auto scroll. default: true                       | boolean                |
+| app:disableAutoScrollOnUserInteraction    | Disables auto scrolling when user interacts. default: false        | boolean                |
+
+_Note:_ Add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` in your layout's root view.
+
 
 Developed By
 --------
