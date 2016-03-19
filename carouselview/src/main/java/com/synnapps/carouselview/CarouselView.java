@@ -196,12 +196,19 @@ public class CarouselView extends RelativeLayout {
     }
 
     /**
-     * Stops auto scrolling.
+     * Pause auto scrolling unless user interacts provided autoPlay is enabled.
      */
     public void pauseCarousel() {
 
         resetScrollTimer();
+    }
 
+    /**
+     * Stops auto scrolling.
+     */
+    public void stopCarousel() {
+
+        this.autoPlay = false;
     }
 
 
