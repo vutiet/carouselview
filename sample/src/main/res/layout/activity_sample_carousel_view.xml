@@ -14,7 +14,6 @@
         app:pageColor="#00000000"
         app:radius="6dp"
         app:slideInterval="4000"
-        app:autoScroll="false"
         app:strokeColor="#FF777777"
         app:strokeWidth="1dp" />
 
@@ -39,7 +38,7 @@
         android:layout_below="@+id/carouselLabel"
         android:layout_marginTop="20dp"
         app:fillColor="#FFFFFFFF"
-        app:disableAutoScrollOnUserInteraction="true"
+        app:disableAutoPlayOnUserInteraction="true"
         app:pageColor="#00000000"
         app:radius="6dp"
         app:strokeColor="#FF777777"
@@ -58,5 +57,19 @@
         android:text="Custom Views"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/pauseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/customCarouselLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="Pause"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
 
 </RelativeLayout>

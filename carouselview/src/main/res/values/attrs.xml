@@ -29,8 +29,8 @@
     <attr name="radius" format="dimension"/>
     <attr name="snap" format="boolean"/>
     <attr name="strokeColor" format="color"/>
-    <attr name="autoScroll" format="boolean"/>
-    <attr name="disableAutoScrollOnUserInteraction" format="boolean"/>
+    <attr name="autoPlay" format="boolean"/>
+    <attr name="disableAutoPlayOnUserInteraction" format="boolean"/>
 
 
     <declare-styleable name="CirclePageIndicator">
@@ -74,9 +74,9 @@
         <!-- Width of the stroke used to draw the circles. -->
         <attr name="strokeWidth"/>
         <!-- Enable/Disable auto scrolling of views. default: true -->
-        <attr name="autoScroll"/>
+        <attr name="autoPlay"/>
         <!-- Disables auto scrolling when user interacts. default: false -->
-        <attr name="disableAutoScrollOnUserInteraction"/>
+        <attr name="disableAutoPlayOnUserInteraction"/>
 
 
     </declare-styleable>

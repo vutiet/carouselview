@@ -116,8 +116,8 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 | app:radius 			                    | Radius of the circles. This is also the spacing between circles.   | dimension 			  |
 | app:snap 				                    | Whether or not the selected indicator snaps to the circles. 		 | boolean 				  |
 | app:strokeColor 		                    | Width of the stroke used to draw the circles. 					 | color 				  |
-| app:autoScroll                            | Whether or not to auto scroll. default: true                       | boolean                |
-| app:disableAutoScrollOnUserInteraction    | Disables auto scrolling when user interacts. default: false        | boolean                |
+| app:autoPlay                              | Whether or not to auto play. Default: true                         | boolean                |
+| app:disableAutoPlayOnUserInteraction      | Disables autoPlay when user interacts. Default: false              | boolean                |
 
 _Note:_ Add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` in your layout's root view.
 

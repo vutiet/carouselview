@@ -41,8 +41,8 @@ public class CarouselView extends RelativeLayout {
     private Timer swipeTimer;
     private SwipeTask swipeTask;
 
-    private boolean autoScroll;
-    private boolean disableAutoScrollOnUserInteraction;
+    private boolean autoPlay;
+    private boolean disableAutoPlayOnUserInteraction;
     private boolean userInitiatedScroll;
     private int previousState;
 
@@ -83,8 +83,8 @@ public class CarouselView extends RelativeLayout {
                 setOrientation(a.getInt(R.styleable.CarouselView_indicatorOrientation, LinearLayout.HORIZONTAL));
                 setPosition(a.getInt(R.styleable.CarouselView_indicatorPosition, 1));
                 int fillColor = a.getColor(R.styleable.CarouselView_fillColor, 0);
-                setAutoScroll(a.getBoolean(R.styleable.CarouselView_autoScroll, true));
-                setDisableAutoScrollOnUserInteraction(a.getBoolean(R.styleable.CarouselView_disableAutoScrollOnUserInteraction, false));
+                setAutoPlay(a.getBoolean(R.styleable.CarouselView_autoPlay, true));
+                setDisableAutoPlayOnUserInteraction(a.getBoolean(R.styleable.CarouselView_disableAutoPlayOnUserInteraction, false));
 
                 if (fillColor != 0) {
                     setFillColor(fillColor);
@@ -134,24 +134,24 @@ public class CarouselView extends RelativeLayout {
         this.slideInterval = slideInterval;
 
         if (null != containerViewPager) {
-            startScrolling();
+            playCarousel();
         }
     }
 
-    public boolean isAutoScroll() {
-        return autoScroll;
+    public boolean isAutoPlay() {
+        return autoPlay;
     }
 
-    private void setAutoScroll(boolean autoScroll) {
-        this.autoScroll = autoScroll;
+    private void setAutoPlay(boolean autoPlay) {
+        this.autoPlay = autoPlay;
     }
 
-    public boolean isDisableAutoScrollOnUserInteraction() {
-        return disableAutoScrollOnUserInteraction;
+    public boolean isDisableAutoPlayOnUserInteraction() {
+        return disableAutoPlayOnUserInteraction;
     }
 
-    private void setDisableAutoScrollOnUserInteraction(boolean disableAutoScrollOnUserInteraction) {
-        this.disableAutoScrollOnUserInteraction = disableAutoScrollOnUserInteraction;
+    private void setDisableAutoPlayOnUserInteraction(boolean disableAutoPlayOnUserInteraction) {
+        this.disableAutoPlayOnUserInteraction = disableAutoPlayOnUserInteraction;
     }
 
     public void setData() {
@@ -159,7 +159,7 @@ public class CarouselView extends RelativeLayout {
         containerViewPager.setAdapter(carouselPagerAdapter);
         mIndicator.setViewPager(containerViewPager);
 
-        startScrolling();
+        playCarousel();
     }
 
     private void stopScrollTimer() {
@@ -183,17 +183,23 @@ public class CarouselView extends RelativeLayout {
 
     }
 
-    private void startScrolling() {
+    /**
+     * Starts auto scrolling if
+     */
+    public void playCarousel() {
 
         resetScrollTimer();
 
-        if (autoScroll && slideInterval > 0 && containerViewPager.getAdapter() != null && containerViewPager.getAdapter().getCount() > 1) {
+        if (autoPlay && slideInterval > 0 && containerViewPager.getAdapter() != null && containerViewPager.getAdapter().getCount() > 1) {
 
             swipeTimer.schedule(swipeTask, slideInterval, slideInterval);
         }
     }
 
-    private void stopScrolling() {
+    /**
+     * Stops auto scrolling.
+     */
+    public void pauseCarousel() {
 
         resetScrollTimer();
 
@@ -282,10 +288,10 @@ public class CarouselView extends RelativeLayout {
                     && state == ViewPager.SCROLL_STATE_SETTLING) {
                 userInitiatedScroll = true;
 
-                if (disableAutoScrollOnUserInteraction) {
-                    stopScrolling();
+                if (disableAutoPlayOnUserInteraction) {
+                    pauseCarousel();
                 } else {
-                    startScrolling();
+                    playCarousel();
                 }
 
             } else if (previousState == ViewPager.SCROLL_STATE_SETTLING
