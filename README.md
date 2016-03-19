@@ -107,7 +107,7 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 ##Supported xml Attributes
 
 | Attribute          	   | Description          							   			  		| Values 				|
-| -------------------------|:-------------------------------------------------------------------|-----------------------|		
+| -------------------------|--------------------------------------------------------------------|-----------------------|		
 | app:slideInterval 	   | Interval per page in milliseconds. 			   		      		| integer				|
 | app:indicatorPosition    | Position of the indicator. 					   			  		| left, right, center 	|
 | app:indicatorOrientation | Orientation of the indicator. 					   			  		| horizontal, vertical 	|
