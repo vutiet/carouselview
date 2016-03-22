@@ -14,14 +14,14 @@ Download
 --------
 ####Gradle:
 ```groovy
-compile 'com.synnapps:carouselview:0.0.4'
+compile 'com.synnapps:carouselview:0.0.5'
 ```
 ####Maven:
 ```xml
 <dependency>
   <groupId>com.synnapps</groupId>
   <artifactId>carouselview</artifactId>
-  <version>0.0.4</version>
+  <version>0.0.5</version>
   <type>pom</type>
 </dependency>
 ```
@@ -109,7 +109,7 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 | Attribute          	                    | Description          							   			  		 | Values 				  |
 | ------------------------------------------|:-------------------------------------------------------------------|------------------------|
 | app:slideInterval 	                    | Interval per page in milliseconds. 			   		      		 | integer				  |
-| app:indicatorPosition                     | Position of the indicator. 					   			  		 | [left, right, center]  |
+| app:indicatorGravity                      | Gravity of the indicator.  (Just like layout_gravity) 			 | gravity                |
 | app:indicatorOrientation                  | Orientation of the indicator. 					   			  	 | [horizontal, vertical] |
 | app:fillColor	  		                    | Color of the filled circle that represents the current page. 		 | color 				  |
 | app:pageColor   		                    | Color of the filled circles that represents pages. 		  		 | color 				  |
@@ -118,6 +118,8 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 | app:strokeColor 		                    | Width of the stroke used to draw the circles. 					 | color 				  |
 | app:autoPlay                              | Whether or not to auto play. Default: true                         | boolean                |
 | app:disableAutoPlayOnUserInteraction      | Disables autoPlay when user interacts. Default: false              | boolean                |
+| app:indicatorMarginHorizontal 			| Sets horizontal margin for Indicator in Carousel View              | dimension 			  |
+| app:indicatorMarginVertical 			    | Sets vertical margin for Indicator in Carousel View                | dimension 			  |
 
 _Note:_ Add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` in your layout's root view.
 

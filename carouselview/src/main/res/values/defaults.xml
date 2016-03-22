@@ -19,4 +19,6 @@
     <bool name="default_circle_indicator_snap">false</bool>
     <color name="default_circle_indicator_stroke_color">#FFDDDDDD</color>
     <dimen name="default_circle_indicator_stroke_width">1dp</dimen>
+    <dimen name="default_indicator_margin_horizontal">10dp</dimen>
+    <dimen name="default_indicator_margin_vertical">25dp</dimen>
 </resources>
