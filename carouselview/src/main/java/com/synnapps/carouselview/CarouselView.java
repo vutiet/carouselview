@@ -154,7 +154,7 @@ public class CarouselView extends FrameLayout {
         this.disableAutoPlayOnUserInteraction = disableAutoPlayOnUserInteraction;
     }
 
-    public void setData() {
+    private void setData() {
         CarouselPagerAdapter carouselPagerAdapter = new CarouselPagerAdapter(getContext());
         containerViewPager.setAdapter(carouselPagerAdapter);
         mIndicator.setViewPager(containerViewPager);
