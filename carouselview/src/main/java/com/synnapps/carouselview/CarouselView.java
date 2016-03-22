@@ -70,7 +70,7 @@ public class CarouselView extends FrameLayout {
         } else {
             View view = LayoutInflater.from(context).inflate(R.layout.view_carousel, this, true);
             containerViewPager = (ViewPager) view.findViewById(R.id.containerViewPager);
-            mIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
+            mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
 
             containerViewPager.addOnPageChangeListener(carouselOnPageChangeListener);
 
