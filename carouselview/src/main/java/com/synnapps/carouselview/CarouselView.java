@@ -8,12 +8,13 @@ import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,17 +22,15 @@ import java.util.TimerTask;
 /**
  * Created by Sayyam on 11/25/15.
  */
-public class CarouselView extends RelativeLayout {
-
-    public static final int POSITION_LEFT = 0;
-    public static final int POSITION_RIGHT = 1;
-    public static final int POSITION_CENTER = 2;
+public class CarouselView extends FrameLayout {
 
     private final int DEFAULT_SLIDE_INTERVAL = 3500;
 
     private int mPageCount;
     private int slideInterval = DEFAULT_SLIDE_INTERVAL;
-    private int mPosition = 1;
+    private int mIndicatorGravity;
+    private int indicatorMarginVertical;
+    private int indicatorMarginHorizontal;
 
     private ViewPager containerViewPager;
     private CirclePageIndicator mIndicator;
@@ -78,13 +77,15 @@ public class CarouselView extends RelativeLayout {
             //Retrieve styles attributes
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CarouselView, defStyleAttr, 0);
             try {
+                setIndicatorMarginVertical(a.getInt(R.styleable.CarouselView_indicatorMarginVertical, getResources().getDimensionPixelSize(R.dimen.default_indicator_margin_vertical)));
+                setIndicatorMarginHorizontal(a.getInt(R.styleable.CarouselView_indicatorMarginHorizontal, getResources().getDimensionPixelSize(R.dimen.default_indicator_margin_horizontal)));
                 setSlideInterval(a.getInt(R.styleable.CarouselView_slideInterval, DEFAULT_SLIDE_INTERVAL));
                 setOrientation(a.getInt(R.styleable.CarouselView_indicatorOrientation, LinearLayout.HORIZONTAL));
-                setPosition(a.getInt(R.styleable.CarouselView_indicatorPosition, 1));
-                int fillColor = a.getColor(R.styleable.CarouselView_fillColor, 0);
+                setIndicatorGravity(a.getInt(R.styleable.CarouselView_indicatorGravity, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL));
                 setAutoPlay(a.getBoolean(R.styleable.CarouselView_autoPlay, true));
                 setDisableAutoPlayOnUserInteraction(a.getBoolean(R.styleable.CarouselView_disableAutoPlayOnUserInteraction, false));
 
+                int fillColor = a.getColor(R.styleable.CarouselView_fillColor, 0);
                 if (fillColor != 0) {
                     setFillColor(fillColor);
                 }
@@ -157,7 +158,6 @@ public class CarouselView extends RelativeLayout {
         CarouselPagerAdapter carouselPagerAdapter = new CarouselPagerAdapter(getContext());
         containerViewPager.setAdapter(carouselPagerAdapter);
         mIndicator.setViewPager(containerViewPager);
-
         playCarousel();
     }
 
@@ -342,28 +342,33 @@ public class CarouselView extends RelativeLayout {
         containerViewPager.setCurrentItem(item);
     }
 
-    public int getPosition() {
-        return mPosition;
+    public int getIndicatorMarginVertical() {
+        return indicatorMarginVertical;
     }
 
-    public void setPosition(int position) {
-        mPosition = position;
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mIndicator.getLayoutParams();
-        switch (mPosition) {
-            case POSITION_LEFT:
-                params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-                break;
-            case POSITION_RIGHT:
-                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                break;
-            case POSITION_CENTER:
-                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                break;
-            default:
-                throw new IllegalArgumentException("Position must be LEFT, RIGHT or CENTER.");
-        }
+    public void setIndicatorMarginVertical(int _indicatorMarginVertical) {
+        indicatorMarginVertical = _indicatorMarginVertical;
     }
 
+    public int getIndicatorMarginHorizontal() {
+        return indicatorMarginHorizontal;
+    }
+
+    public void setIndicatorMarginHorizontal(int _indicatorMarginHorizontal) {
+        indicatorMarginHorizontal = _indicatorMarginHorizontal;
+    }
+
+    public int getIndicatorGravity() {
+        return mIndicatorGravity;
+    }
+
+    public void setIndicatorGravity(int gravity) {
+        mIndicatorGravity = gravity;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.gravity = mIndicatorGravity;
+        params.setMargins(indicatorMarginHorizontal, indicatorMarginVertical, indicatorMarginHorizontal, indicatorMarginVertical);
+        mIndicator.setLayoutParams(params);
+    }
 
     public int getOrientation() {
         return mIndicator.getOrientation();
