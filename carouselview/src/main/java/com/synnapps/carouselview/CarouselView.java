@@ -157,7 +157,7 @@ public class CarouselView extends RelativeLayout {
         CarouselPagerAdapter carouselPagerAdapter = new CarouselPagerAdapter(getContext());
         containerViewPager.setAdapter(carouselPagerAdapter);
         mIndicator.setViewPager(containerViewPager);
-
+        containerViewPager.setOffscreenPageLimit(getPageCount());
         playCarousel();
     }
 
@@ -331,6 +331,7 @@ public class CarouselView extends RelativeLayout {
 
     public void setPageCount(int mPageCount) {
         this.mPageCount = mPageCount;
+
         setData();
     }
 

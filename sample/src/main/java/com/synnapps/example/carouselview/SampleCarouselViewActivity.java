@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 import com.synnapps.carouselview.ViewListener;
@@ -23,6 +24,13 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 
     int[] sampleImages = {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
     String[] sampleTitles = {"Orange", "Grapes", "Strawberry", "Cherry", "Apricot"};
+    String[] sampleNetworkImageURLs = {
+            "https://placeholdit.imgix.net/~text?txtsize=15&txt=image1&txt=350%C3%97150&w=350&h=150",
+            "https://placeholdit.imgix.net/~text?txtsize=15&txt=image2&txt=350%C3%97150&w=350&h=150",
+            "https://placeholdit.imgix.net/~text?txtsize=15&txt=image3&txt=350%C3%97150&w=350&h=150",
+            "https://placeholdit.imgix.net/~text?txtsize=15&txt=image4&txt=350%C3%97150&w=350&h=150",
+            "https://placeholdit.imgix.net/~text?txtsize=15&txt=image5&txt=350%C3%97150&w=350&h=150"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +60,9 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
 
-            imageView.setImageResource(sampleImages[position]);
+            Picasso.with(getApplicationContext()).load(sampleNetworkImageURLs[position]).placeholder(sampleImages[0]).error(sampleImages[3]).fit().centerCrop().into(imageView);
+
+            //imageView.setImageResource(sampleImages[position]);
         }
     };
 
