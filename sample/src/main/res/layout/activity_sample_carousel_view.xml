@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:fillColor="#FFFFFFFF"
-        app:indicatorGravity="bottom|center_horizontal"
+        app:indicatorGravity="top|center_horizontal"
         app:indicatorOrientation="horizontal"
         app:pageColor="#00000000"
         app:radius="6dp"
