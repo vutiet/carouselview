@@ -25,10 +25,11 @@ import java.util.TimerTask;
 public class CarouselView extends FrameLayout {
 
     private final int DEFAULT_SLIDE_INTERVAL = 3500;
+    private final int DEFAULT_GRAVITY = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
 
     private int mPageCount;
     private int slideInterval = DEFAULT_SLIDE_INTERVAL;
-    private int mIndicatorGravity;
+    private int mIndicatorGravity = DEFAULT_GRAVITY;
     private int indicatorMarginVertical;
     private int indicatorMarginHorizontal;
 
