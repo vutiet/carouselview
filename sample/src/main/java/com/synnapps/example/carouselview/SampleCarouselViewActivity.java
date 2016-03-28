@@ -54,6 +54,9 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 
         carouselView.setImageListener(imageListener);
         customCarouselView.setViewListener(viewListener);
+
+//        LinearLayout tv = new LinearLayout();
+//        tv.setOrientation(5);
     }
 
     // To set simple images
