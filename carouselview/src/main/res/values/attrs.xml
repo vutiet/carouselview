@@ -45,7 +45,7 @@
     <attr name="centered" format="boolean" />
     <attr name="strokeWidth" format="dimension" />
     <attr name="slideInterval" format="integer" />
-    <attr name="slideVelocity" format="integer" />
+    <attr name="pageTransformInterval" format="integer" />
     <attr name="fillColor" format="color" />
     <attr name="pageColor" format="color" />
     <attr name="radius" format="dimension" />
@@ -106,7 +106,7 @@
         <!-- Sets vertical margin for Indicator in Carousel View. -->
         <attr name="indicatorMarginVertical" />
         <!-- Sets speed at which page will slide from one to another in milliseconds. -->
-        <attr name="slideVelocity" />
+        <attr name="pageTransformInterval" />
         <!-- Sets page transition animation. -->
         <attr name="pageTransformer" />
         <!-- Sets whether to animate transition from last position to first or not. -->

@@ -16,10 +16,10 @@
         app:pageColor="#00000000"
         app:indicatorGravity="top"
         app:radius="6dp"
-        app:slideVelocity="1000"
+        app:pageTransformInterval="1500"
         app:pageTransformer="depth"
         app:animateOnBoundary="true"
-        app:slideInterval="4000"
+        app:slideInterval="3000"
         app:strokeColor="#FF777777"
         app:strokeWidth="1dp" />
 

@@ -20,8 +20,6 @@ import android.widget.RemoteViews.RemoteView;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.synnapps.carouselview.R.styleable.CarouselView_pageTransformer;
-
 /**
  * Created by Sayyam on 11/25/15.
  *
@@ -41,7 +39,7 @@ public class CarouselView extends FrameLayout {
     private int mIndicatorGravity = DEFAULT_GRAVITY;
     private int indicatorMarginVertical;
     private int indicatorMarginHorizontal;
-    private int slideVelocity = DEFAULT_SLIDE_VELOCITY;
+    private int pageTransformInterval = DEFAULT_SLIDE_VELOCITY;
 
     private CarouselViewPager containerViewPager;
     private CirclePageIndicator mIndicator;
@@ -95,12 +93,12 @@ public class CarouselView extends FrameLayout {
             try {
                 setIndicatorMarginVertical(a.getInt(R.styleable.CarouselView_indicatorMarginVertical, getResources().getDimensionPixelSize(R.dimen.default_indicator_margin_vertical)));
                 setIndicatorMarginHorizontal(a.getInt(R.styleable.CarouselView_indicatorMarginHorizontal, getResources().getDimensionPixelSize(R.dimen.default_indicator_margin_horizontal)));
+                setPageTransformInterval(a.getInt(R.styleable.CarouselView_pageTransformInterval, DEFAULT_SLIDE_VELOCITY));
                 setSlideInterval(a.getInt(R.styleable.CarouselView_slideInterval, DEFAULT_SLIDE_INTERVAL));
                 setOrientation(a.getInt(R.styleable.CarouselView_indicatorOrientation, LinearLayout.HORIZONTAL));
                 setIndicatorGravity(a.getInt(R.styleable.CarouselView_indicatorGravity, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL));
                 setAutoPlay(a.getBoolean(R.styleable.CarouselView_autoPlay, true));
                 setDisableAutoPlayOnUserInteraction(a.getBoolean(R.styleable.CarouselView_disableAutoPlayOnUserInteraction, false));
-                setSlideVelocity(a.getInt(R.styleable.CarouselView_slideVelocity, DEFAULT_SLIDE_VELOCITY));
                 setAnimateOnBoundary(a.getBoolean(R.styleable.CarouselView_animateOnBoundary, true));
 
                 setPageTransformer(a.getInt(R.styleable.CarouselView_pageTransformer, CarouselViewPagerTransformer.DEFAULT));
@@ -142,8 +140,12 @@ public class CarouselView extends FrameLayout {
      *
      * @param slideInterval integer
      */
-    public void setSlideInterval(int slideInterval) {
+    public  void setSlideInterval(int slideInterval) {
         this.slideInterval = slideInterval;
+
+        if (null != containerViewPager) {
+            playCarousel();
+        }
     }
 
     /**
@@ -152,7 +154,7 @@ public class CarouselView extends FrameLayout {
      * @param slideInterval integer
      */
     public void reSetSlideInterval(int slideInterval) {
-        this.slideInterval = slideInterval;
+        setSlideInterval(slideInterval);
 
         if (null != containerViewPager) {
             playCarousel();
@@ -162,11 +164,16 @@ public class CarouselView extends FrameLayout {
     /**
      * Sets speed at which page will slide from one to another in milliseconds
      *
-     * @param slideVelocity integer
+     * @param pageTransformInterval integer
      */
-    public void setSlideVelocity(int slideVelocity) {
-        this.slideVelocity = slideVelocity;
-        containerViewPager.setTransitionVelocity(slideVelocity);
+    public void setPageTransformInterval(int pageTransformInterval) {
+        if (pageTransformInterval > 0) {
+            this.pageTransformInterval = pageTransformInterval;
+        } else {
+            this.pageTransformInterval = DEFAULT_SLIDE_VELOCITY;
+        }
+
+        containerViewPager.setTransitionVelocity(pageTransformInterval);
     }
 
     public ViewPager.PageTransformer getPageTransformer() {

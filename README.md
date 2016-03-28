@@ -14,14 +14,14 @@ Download
 --------
 ####Gradle:
 ```groovy
-compile 'com.synnapps:carouselview:0.0.8'
+compile 'com.synnapps:carouselview:0.0.9'
 ```
 ####Maven:
 ```xml
 <dependency>
   <groupId>com.synnapps</groupId>
   <artifactId>carouselview</artifactId>
-  <version>0.0.8</version>
+  <version>0.0.9</version>
   <type>pom</type>
 </dependency>
 ```
@@ -120,7 +120,7 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 | app:disableAutoPlayOnUserInteraction      | Disables autoPlay when user interacts. Default: false              | boolean                      |
 | app:indicatorMarginHorizontal 			| Sets horizontal margin for Indicator in Carousel View              | dimension 			        |
 | app:indicatorMarginVertical 			    | Sets vertical margin for Indicator in Carousel View                | dimension 			        |
-| app:slideVelocity                         | Sets speed at which page will slide from one to another in ms.     | integer                      |
+| app:pageTransformInterval                 | Sets speed at which page will slide from one to another in ms.     | integer                      |
 | app:pageTransformer                       | Sets page transition animation.                                    | [zoom,flow,depth,slide_over] |
 | app:animateOnBoundary                     | Sets whether to animate from last page. Default: true              | boolean                      |
 

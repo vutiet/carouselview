@@ -47,7 +47,6 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
         pauseButton.setOnClickListener(pauseOnClickListener);
 
         carouselView.setPageCount(sampleImages.length);
-        carouselView.setSlideInterval(4000);
 
         customCarouselView.setPageCount(sampleImages.length);
         customCarouselView.setSlideInterval(4000);
@@ -55,8 +54,6 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
         carouselView.setImageListener(imageListener);
         customCarouselView.setViewListener(viewListener);
 
-//        LinearLayout tv = new LinearLayout();
-//        tv.setOrientation(5);
     }
 
     // To set simple images
