@@ -15,24 +15,33 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews.RemoteView;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.synnapps.carouselview.R.styleable.CarouselView_pageTransformer;
+
 /**
  * Created by Sayyam on 11/25/15.
+ *
+ * @attr ref R.styleable#CarouselView_pageTransformer
  */
+@RemoteView
 public class CarouselView extends FrameLayout {
 
-    private final int DEFAULT_SLIDE_INTERVAL = 3500;
+    private static final int DEFAULT_SLIDE_INTERVAL = 3500;
+    private static final int DEFAULT_SLIDE_VELOCITY = 400;
+
 
     private int mPageCount;
     private int slideInterval = DEFAULT_SLIDE_INTERVAL;
     private int mIndicatorGravity;
     private int indicatorMarginVertical;
     private int indicatorMarginHorizontal;
+    private int slideVelocity = DEFAULT_SLIDE_VELOCITY;
 
-    private ViewPager containerViewPager;
+    private CarouselViewPager containerViewPager;
     private CirclePageIndicator mIndicator;
     private ViewListener mViewListener = null;
     private ImageListener mImageListener = null;
@@ -42,7 +51,11 @@ public class CarouselView extends FrameLayout {
 
     private boolean autoPlay;
     private boolean disableAutoPlayOnUserInteraction;
+    private boolean animateOnBoundary = true;
+
     private int previousState;
+
+    private ViewPager.PageTransformer pageTransformer;
 
     public CarouselView(Context context) {
         super(context);
@@ -69,10 +82,11 @@ public class CarouselView extends FrameLayout {
             return;
         } else {
             View view = LayoutInflater.from(context).inflate(R.layout.view_carousel, this, true);
-            containerViewPager = (ViewPager) view.findViewById(R.id.containerViewPager);
+            containerViewPager = (CarouselViewPager) view.findViewById(R.id.containerViewPager);
             mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
 
             containerViewPager.addOnPageChangeListener(carouselOnPageChangeListener);
+
 
             //Retrieve styles attributes
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CarouselView, defStyleAttr, 0);
@@ -84,6 +98,10 @@ public class CarouselView extends FrameLayout {
                 setIndicatorGravity(a.getInt(R.styleable.CarouselView_indicatorGravity, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL));
                 setAutoPlay(a.getBoolean(R.styleable.CarouselView_autoPlay, true));
                 setDisableAutoPlayOnUserInteraction(a.getBoolean(R.styleable.CarouselView_disableAutoPlayOnUserInteraction, false));
+                setSlideVelocity(a.getInt(R.styleable.CarouselView_slideVelocity, DEFAULT_SLIDE_VELOCITY));
+                setAnimateOnBoundary(a.getBoolean(R.styleable.CarouselView_animateOnBoundary, true));
+
+                setPageTransformer(a.getInt(R.styleable.CarouselView_pageTransformer, CarouselViewPagerTransformer.DEFAULT));
 
                 int fillColor = a.getColor(R.styleable.CarouselView_fillColor, 0);
                 if (fillColor != 0) {
@@ -106,6 +124,7 @@ public class CarouselView extends FrameLayout {
                 if (strokeWidth != 0) {
                     setStrokeWidth(strokeWidth);
                 }
+
             } finally {
                 a.recycle();
             }
@@ -119,7 +138,7 @@ public class CarouselView extends FrameLayout {
     /**
      * Set interval for one slide in milliseconds.
      *
-     * @param slideInterval milliseconds
+     * @param slideInterval integer
      */
     public void setSlideInterval(int slideInterval) {
         this.slideInterval = slideInterval;
@@ -128,7 +147,7 @@ public class CarouselView extends FrameLayout {
     /**
      * Set interval for one slide in milliseconds.
      *
-     * @param slideInterval milliseconds
+     * @param slideInterval integer
      */
     public void reSetSlideInterval(int slideInterval) {
         this.slideInterval = slideInterval;
@@ -136,6 +155,50 @@ public class CarouselView extends FrameLayout {
         if (null != containerViewPager) {
             playCarousel();
         }
+    }
+
+    /**
+     * Sets speed at which page will slide from one to another in milliseconds
+     *
+     * @param slideVelocity integer
+     */
+    public void setSlideVelocity(int slideVelocity) {
+        this.slideVelocity = slideVelocity;
+        containerViewPager.setTransitionVelocity(slideVelocity);
+    }
+
+    public ViewPager.PageTransformer getPageTransformer() {
+        return pageTransformer;
+    }
+
+    /**
+     * Sets page transition animation.
+     *
+     * @param pageTransformer Choose from zoom, flow, depth, slide_over .
+     */
+    public void setPageTransformer(ViewPager.PageTransformer pageTransformer) {
+        this.pageTransformer = pageTransformer;
+        containerViewPager.setPageTransformer(true, pageTransformer);
+    }
+
+    /**
+     * Sets page transition animation.
+     *
+     * @param transformer Pass {@link CarouselViewPagerTransformer#FLOW}, {@link CarouselViewPagerTransformer#ZOOM}, {@link CarouselViewPagerTransformer#DEPTH} or {@link CarouselViewPagerTransformer#SLIDE_OVER}
+     * @attr
+     */
+    public void setPageTransformer(@CarouselViewPagerTransformer.Transformer int transformer) {
+        setPageTransformer(new CarouselViewPagerTransformer(transformer));
+
+    }
+
+    /**
+     * Sets whether to animate transition from last position to first or not.
+     *
+     * @param animateOnBoundary .
+     */
+    public void setAnimateOnBoundary(boolean animateOnBoundary) {
+        this.animateOnBoundary = animateOnBoundary;
     }
 
     public boolean isAutoPlay() {
@@ -312,7 +375,10 @@ public class CarouselView extends FrameLayout {
         public void run() {
             containerViewPager.post(new Runnable() {
                 public void run() {
-                    containerViewPager.setCurrentItem((containerViewPager.getCurrentItem() + 1) % getPageCount(), true);
+
+                    int nextPage = (containerViewPager.getCurrentItem() + 1) % getPageCount();
+
+                    containerViewPager.setCurrentItem(nextPage, 0 != nextPage || animateOnBoundary);
                 }
             });
         }
