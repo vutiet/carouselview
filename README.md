@@ -14,14 +14,14 @@ Download
 --------
 ####Gradle:
 ```groovy
-compile 'com.synnapps:carouselview:0.0.9'
+compile 'com.synnapps:carouselview:0.0.10'
 ```
 ####Maven:
 ```xml
 <dependency>
   <groupId>com.synnapps</groupId>
   <artifactId>carouselview</artifactId>
-  <version>0.0.9</version>
+  <version>0.0.10</version>
   <type>pom</type>
 </dependency>
 ```
