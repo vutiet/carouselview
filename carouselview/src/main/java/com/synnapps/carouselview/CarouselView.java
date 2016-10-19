@@ -230,6 +230,8 @@ public class CarouselView extends FrameLayout {
         CarouselPagerAdapter carouselPagerAdapter = new CarouselPagerAdapter(getContext());
         containerViewPager.setAdapter(carouselPagerAdapter);
         mIndicator.setViewPager(containerViewPager);
+        mIndicator.requestLayout();
+        mIndicator.invalidate();
         containerViewPager.setOffscreenPageLimit(getPageCount());
         playCarousel();
     }
