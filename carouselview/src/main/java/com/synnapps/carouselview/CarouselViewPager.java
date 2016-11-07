@@ -3,6 +3,7 @@ package com.synnapps.carouselview;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.animation.Interpolator;
 
 import java.lang.reflect.Field;
@@ -12,6 +13,12 @@ import java.lang.reflect.Field;
  */
 public class CarouselViewPager extends ViewPager {
 
+    private ImageClickListener imageClickListener;
+    private float oldX = 0, newX = 0, sens = 5;
+
+    public void setImageClickListener(ImageClickListener imageClickListener) {
+        this.imageClickListener = imageClickListener;
+    }
 
     public CarouselViewPager(Context context) {
         super(context);
@@ -49,6 +56,28 @@ public class CarouselViewPager extends ViewPager {
      */
     public void setTransitionVelocity(int scrollFactor) {
         mScroller.setmScrollDuration(scrollFactor);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                oldX = ev.getX();
+                break;
+
+            case MotionEvent.ACTION_UP:
+                newX = ev.getX();
+                if (Math.abs(oldX - newX) < sens) {
+                    if(imageClickListener != null)
+                        imageClickListener.onClick(getCurrentItem());
+                    return true;
+                }
+                oldX = 0;
+                newX = 0;
+                break;
+        }
+
+        return super.onTouchEvent(ev);
     }
 
 }
