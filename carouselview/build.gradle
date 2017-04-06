@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/sayyam/carouselview'
     gitUrl = 'https://github.com/sayyam/carouselview.git'
 
-    libraryVersion = '0.1.1'
+    libraryVersion = '0.1.2'
 
     developerId = 'sayyam'
     developerName = 'Sayyam mehmood'
@@ -26,13 +26,14 @@ ext {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "23.0.3"
 
+    buildToolsVersion "25.0.2"
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 3
         versionName "0.1.0"
+
     }
     buildTypes {
         release {
