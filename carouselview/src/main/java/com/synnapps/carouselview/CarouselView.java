@@ -92,8 +92,8 @@ public class CarouselView extends FrameLayout {
             //Retrieve styles attributes
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CarouselView, defStyleAttr, 0);
             try {
-                setIndicatorMarginVertical(a.getInt(R.styleable.CarouselView_indicatorMarginVertical, getResources().getDimensionPixelSize(R.dimen.default_indicator_margin_vertical)));
-                setIndicatorMarginHorizontal(a.getInt(R.styleable.CarouselView_indicatorMarginHorizontal, getResources().getDimensionPixelSize(R.dimen.default_indicator_margin_horizontal)));
+                indicatorMarginVertical = a.getDimensionPixelSize(R.styleable.CarouselView_indicatorMarginVertical, getResources().getDimensionPixelSize(R.dimen.default_indicator_margin_vertical));
+                indicatorMarginHorizontal = a.getDimensionPixelSize(R.styleable.CarouselView_indicatorMarginHorizontal, getResources().getDimensionPixelSize(R.dimen.default_indicator_margin_horizontal));
                 setPageTransformInterval(a.getInt(R.styleable.CarouselView_pageTransformInterval, DEFAULT_SLIDE_VELOCITY));
                 setSlideInterval(a.getInt(R.styleable.CarouselView_slideInterval, DEFAULT_SLIDE_INTERVAL));
                 setOrientation(a.getInt(R.styleable.CarouselView_indicatorOrientation, LinearLayout.HORIZONTAL));
@@ -147,7 +147,7 @@ public class CarouselView extends FrameLayout {
      *
      * @param slideInterval integer
      */
-    public  void setSlideInterval(int slideInterval) {
+    public void setSlideInterval(int slideInterval) {
         this.slideInterval = slideInterval;
 
         if (null != containerViewPager) {
@@ -447,6 +447,9 @@ public class CarouselView extends FrameLayout {
 
     public void setIndicatorMarginVertical(int _indicatorMarginVertical) {
         indicatorMarginVertical = _indicatorMarginVertical;
+        FrameLayout.LayoutParams params = (LayoutParams) getLayoutParams();
+        params.topMargin = indicatorMarginVertical;
+        params.bottomMargin = indicatorMarginVertical;
     }
 
     public int getIndicatorMarginHorizontal() {
@@ -455,6 +458,9 @@ public class CarouselView extends FrameLayout {
 
     public void setIndicatorMarginHorizontal(int _indicatorMarginHorizontal) {
         indicatorMarginHorizontal = _indicatorMarginHorizontal;
+        FrameLayout.LayoutParams params = (LayoutParams) getLayoutParams();
+        params.leftMargin = indicatorMarginHorizontal;
+        params.rightMargin = indicatorMarginHorizontal;
     }
 
     public int getIndicatorGravity() {
