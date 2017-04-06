@@ -104,6 +104,17 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 
 ```
 
+####If you'd like to receive touch events for each image
+
+```java
+customCarouselView.setImageClickListener(new ImageClickListener() {
+            @Override
+            public void onClick(int position) {
+                Toast.makeText(SampleCarouselViewActivity.this, "Clicked item: "+ position, Toast.LENGTH_SHORT).show();
+            }
+        });
+```
+
 ####Supported xml Attributes
 
 | Attribute          	                    | Description          							   			  		 | Values 				        |
