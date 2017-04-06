@@ -45,6 +45,7 @@ public class CarouselView extends FrameLayout {
     private CirclePageIndicator mIndicator;
     private ViewListener mViewListener = null;
     private ImageListener mImageListener = null;
+    private ImageClickListener imageClickListener = null;
 
     private Timer swipeTimer;
     private SwipeTask swipeTask;
@@ -401,6 +402,11 @@ public class CarouselView extends FrameLayout {
 
     public void setViewListener(ViewListener mViewListener) {
         this.mViewListener = mViewListener;
+    }
+
+    public void setImageClickListener(ImageClickListener imageClickListener) {
+        this.imageClickListener = imageClickListener;
+        containerViewPager.setImageClickListener(imageClickListener);
     }
 
     public int getPageCount() {
