@@ -131,6 +131,12 @@ public class CarouselView extends FrameLayout {
             }
         }
     }
+    
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        swipeTimer.cancel();
+    }
 
     public int getSlideInterval() {
         return slideInterval;
