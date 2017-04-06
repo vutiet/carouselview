@@ -12,16 +12,16 @@ A simple yet flexible library to add carousel view in your android application.
 
 Download
 --------
-####Gradle:
+###Gradle:
 ```groovy
-compile 'com.synnapps:carouselview:0.0.10'
+compile 'com.synnapps:carouselview:0.1.1'
 ```
-####Maven:
+###Maven:
 ```xml
 <dependency>
   <groupId>com.synnapps</groupId>
   <artifactId>carouselview</artifactId>
-  <version>0.0.10</version>
+  <version>0.1.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -29,7 +29,7 @@ compile 'com.synnapps:carouselview:0.0.10'
 Usage
 --------
 
-####Include following code in your layout:
+###Include following code in your layout:
 
 ```xml
     <com.synnapps.carouselview.CarouselView
@@ -43,7 +43,7 @@ Usage
         app:strokeColor="#FF777777"
         app:strokeWidth="1dp"/>
 ```
-####Include following code in your activity:
+###Include following code in your activity:
 ```java
 public class SampleCarouselViewActivity extends AppCompatActivity {
 
@@ -72,7 +72,7 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 }
 ```
 
-####If you want to add custom view, implement ```ViewListener```.
+###If you want to add custom view, implement ```ViewListener```.
 ```java
 
 public class SampleCarouselViewActivity extends AppCompatActivity {
@@ -104,7 +104,7 @@ public class SampleCarouselViewActivity extends AppCompatActivity {
 
 ```
 
-####If you'd like to receive touch events for each image
+###If you'd like to receive touch events for each image
 
 ```java
 customCarouselView.setImageClickListener(new ImageClickListener() {
@@ -115,7 +115,7 @@ customCarouselView.setImageClickListener(new ImageClickListener() {
         });
 ```
 
-####Supported xml Attributes
+###Supported xml Attributes
 
 | Attribute          	                    | Description          							   			  		 | Values 				        |
 | ------------------------------------------|--------------------------------------------------------------------|------------------------------|
