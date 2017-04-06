@@ -429,6 +429,10 @@ public class CarouselView extends FrameLayout {
         containerViewPager.addOnPageChangeListener(listener);
     }
 
+    public void clearOnPageChangeListeners() {
+        containerViewPager.clearOnPageChangeListeners();
+    }
+
     public void setCurrentItem(int item) {
         containerViewPager.setCurrentItem(item);
     }
