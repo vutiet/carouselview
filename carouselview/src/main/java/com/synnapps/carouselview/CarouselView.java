@@ -45,6 +45,7 @@ public class CarouselView extends FrameLayout {
     private CirclePageIndicator mIndicator;
     private ViewListener mViewListener = null;
     private ImageListener mImageListener = null;
+    private ImageClickListener imageClickListener = null;
 
     private Timer swipeTimer;
     private SwipeTask swipeTask;
@@ -129,6 +130,12 @@ public class CarouselView extends FrameLayout {
                 a.recycle();
             }
         }
+    }
+    
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        swipeTimer.cancel();
     }
 
     public int getSlideInterval() {
@@ -403,6 +410,11 @@ public class CarouselView extends FrameLayout {
         this.mViewListener = mViewListener;
     }
 
+    public void setImageClickListener(ImageClickListener imageClickListener) {
+        this.imageClickListener = imageClickListener;
+        containerViewPager.setImageClickListener(imageClickListener);
+    }
+
     public int getPageCount() {
         return mPageCount;
     }
@@ -415,6 +427,10 @@ public class CarouselView extends FrameLayout {
 
     public void addOnPageChangeListener(ViewPager.OnPageChangeListener listener) {
         containerViewPager.addOnPageChangeListener(listener);
+    }
+
+    public void clearOnPageChangeListeners() {
+        containerViewPager.clearOnPageChangeListeners();
     }
 
     public void setCurrentItem(int item) {
