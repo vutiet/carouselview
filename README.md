@@ -115,6 +115,12 @@ customCarouselView.setImageClickListener(new ImageClickListener() {
         });
 ```
 
+### If using ProGuard add this line to your proguard-rules.pro:
+
+```
+-keep class com.synnapps.carouselview.** { *; }
+```
+
 ### Supported xml Attributes
 
 | Attribute          	                    | Description          							   			  		 | Values 				        |
