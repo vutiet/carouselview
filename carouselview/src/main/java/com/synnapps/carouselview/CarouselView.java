@@ -32,6 +32,7 @@ public class CarouselView extends FrameLayout {
 
     private static final int DEFAULT_SLIDE_INTERVAL = 3500;
     private static final int DEFAULT_SLIDE_VELOCITY = 400;
+    public static final int DEFAULT_INDICATOR_VISIBILITY = 0;
 
 
     private int mPageCount;
@@ -40,6 +41,7 @@ public class CarouselView extends FrameLayout {
     private int indicatorMarginVertical;
     private int indicatorMarginHorizontal;
     private int pageTransformInterval = DEFAULT_SLIDE_VELOCITY;
+    private int indicatorVisibility = DEFAULT_INDICATOR_VISIBILITY;
 
     private CarouselViewPager containerViewPager;
     private CirclePageIndicator mIndicator;
@@ -101,31 +103,35 @@ public class CarouselView extends FrameLayout {
                 setAutoPlay(a.getBoolean(R.styleable.CarouselView_autoPlay, true));
                 setDisableAutoPlayOnUserInteraction(a.getBoolean(R.styleable.CarouselView_disableAutoPlayOnUserInteraction, false));
                 setAnimateOnBoundary(a.getBoolean(R.styleable.CarouselView_animateOnBoundary, true));
-
                 setPageTransformer(a.getInt(R.styleable.CarouselView_pageTransformer, CarouselViewPagerTransformer.DEFAULT));
 
-                int fillColor = a.getColor(R.styleable.CarouselView_fillColor, 0);
-                if (fillColor != 0) {
-                    setFillColor(fillColor);
-                }
-                int pageColor = a.getColor(R.styleable.CarouselView_pageColor, 0);
-                if (pageColor != 0) {
-                    setPageColor(pageColor);
-                }
-                float radius = a.getDimensionPixelSize(R.styleable.CarouselView_radius, 0);
-                if (radius != 0) {
-                    setRadius(radius);
-                }
-                setSnap(a.getBoolean(R.styleable.CarouselView_snap, getResources().getBoolean(R.bool.default_circle_indicator_snap)));
-                int strokeColor = a.getColor(R.styleable.CarouselView_strokeColor, 0);
-                if (strokeColor != 0) {
-                    setStrokeColor(strokeColor);
-                }
-                float strokeWidth = a.getDimensionPixelSize(R.styleable.CarouselView_strokeWidth, 0);
-                if (strokeWidth != 0) {
-                    setStrokeWidth(strokeWidth);
-                }
+                indicatorVisibility = a.getInt(R.styleable.CarouselView_indicatorVisibility, CarouselView.DEFAULT_INDICATOR_VISIBILITY);
 
+                setmIndicatorVisibility(indicatorVisibility);
+
+                if (indicatorVisibility == View.VISIBLE) {
+                    int fillColor = a.getColor(R.styleable.CarouselView_fillColor, 0);
+                    if (fillColor != 0) {
+                        setFillColor(fillColor);
+                    }
+                    int pageColor = a.getColor(R.styleable.CarouselView_pageColor, 0);
+                    if (pageColor != 0) {
+                        setPageColor(pageColor);
+                    }
+                    float radius = a.getDimensionPixelSize(R.styleable.CarouselView_radius, 0);
+                    if (radius != 0) {
+                        setRadius(radius);
+                    }
+                    setSnap(a.getBoolean(R.styleable.CarouselView_snap, getResources().getBoolean(R.bool.default_circle_indicator_snap)));
+                    int strokeColor = a.getColor(R.styleable.CarouselView_strokeColor, 0);
+                    if (strokeColor != 0) {
+                        setStrokeColor(strokeColor);
+                    }
+                    float strokeWidth = a.getDimensionPixelSize(R.styleable.CarouselView_strokeWidth, 0);
+                    if (strokeWidth != 0) {
+                        setStrokeWidth(strokeWidth);
+                    }
+                }
             } finally {
                 a.recycle();
             }
@@ -473,6 +479,10 @@ public class CarouselView extends FrameLayout {
         params.gravity = mIndicatorGravity;
         params.setMargins(indicatorMarginHorizontal, indicatorMarginVertical, indicatorMarginHorizontal, indicatorMarginVertical);
         mIndicator.setLayoutParams(params);
+    }
+
+    public void setmIndicatorVisibility(int visibility) {
+        mIndicator.setVisibility(visibility);
     }
 
     public int getOrientation() {
