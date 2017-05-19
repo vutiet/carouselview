@@ -107,7 +107,7 @@ public class CarouselView extends FrameLayout {
 
                 indicatorVisibility = a.getInt(R.styleable.CarouselView_indicatorVisibility, CarouselView.DEFAULT_INDICATOR_VISIBILITY);
 
-                setmIndicatorVisibility(indicatorVisibility);
+                setIndicatorVisibility(indicatorVisibility);
 
                 if (indicatorVisibility == View.VISIBLE) {
                     int fillColor = a.getColor(R.styleable.CarouselView_fillColor, 0);
@@ -481,7 +481,7 @@ public class CarouselView extends FrameLayout {
         mIndicator.setLayoutParams(params);
     }
 
-    public void setmIndicatorVisibility(int visibility) {
+    public void setIndicatorVisibility(int visibility) {
         mIndicator.setVisibility(visibility);
     }
 

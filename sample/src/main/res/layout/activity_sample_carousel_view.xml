@@ -21,6 +21,7 @@
         app:radius="6dp"
         app:slideInterval="3000"
         app:strokeColor="#FF777777"
+        app:indicatorVisibility="gone"
         app:strokeWidth="1dp"/>
 
     <TextView
