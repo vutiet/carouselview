@@ -14,14 +14,14 @@ Download
 --------
 ### Gradle:
 ```groovy
-compile 'com.synnapps:carouselview:0.1.3'
+compile 'com.synnapps:carouselview:0.1.4'
 ```
 ### Maven:
 ```xml
 <dependency>
   <groupId>com.synnapps</groupId>
   <artifactId>carouselview</artifactId>
-  <version>0.1.3</version>
+  <version>0.1.4</version>
   <type>pom</type>
 </dependency>
 ```
@@ -115,6 +115,12 @@ customCarouselView.setImageClickListener(new ImageClickListener() {
         });
 ```
 
+### If using ProGuard add this line to your proguard-rules.pro:
+
+```
+-keep class com.synnapps.carouselview.** { *; }
+```
+
 ### Supported xml Attributes
 
 | Attribute          	                    | Description          							   			  		 | Values 				        |
@@ -122,6 +128,7 @@ customCarouselView.setImageClickListener(new ImageClickListener() {
 | app:slideInterval 	                    | Interval per page in ms.           			   		      		 | integer				        |
 | app:indicatorGravity                      | Gravity of the indicator.  (Just like layout_gravity) 			 | gravity                      |
 | app:indicatorOrientation                  | Orientation of the indicator. 					   			  	 | [horizontal, vertical]       |
+| app:indicatorVisibility 				                    | Set visibility of indicator. 		 | [visible,invisible,gone] 				        |
 | app:fillColor	  		                    | Color of the filled circle that represents the current page. 		 | color 				        |
 | app:pageColor   		                    | Color of the filled circles that represents pages. 		  		 | color 				        |
 | app:radius 			                    | Radius of the circles. This is also the spacing between circles.   | dimension 			        |
