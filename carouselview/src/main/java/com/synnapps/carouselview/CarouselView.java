@@ -457,6 +457,10 @@ public class CarouselView extends FrameLayout {
     public int getIndicatorMarginHorizontal() {
         return indicatorMarginHorizontal;
     }
+    
+    public CarouselViewPager getContainerViewPager() {
+        return containerViewPager;
+    }
 
     public void setIndicatorMarginHorizontal(int _indicatorMarginHorizontal) {
         indicatorMarginHorizontal = _indicatorMarginHorizontal;
