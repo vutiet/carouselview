@@ -137,11 +137,17 @@ public class CarouselView extends FrameLayout {
             }
         }
     }
-    
+
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        swipeTimer.cancel();
+        resetScrollTimer();
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        playCarousel();
     }
 
     public int getSlideInterval() {
@@ -252,7 +258,6 @@ public class CarouselView extends FrameLayout {
     }
 
     private void stopScrollTimer() {
-
         if (null != swipeTimer) {
             swipeTimer.cancel();
         }
@@ -264,13 +269,12 @@ public class CarouselView extends FrameLayout {
 
 
     private void resetScrollTimer() {
-
         stopScrollTimer();
 
         swipeTask = new SwipeTask();
         swipeTimer = new Timer();
-
     }
+
 
     /**
      * Starts auto scrolling if
@@ -443,6 +447,10 @@ public class CarouselView extends FrameLayout {
 
     public void setCurrentItem(int item) {
         containerViewPager.setCurrentItem(item);
+    }
+    
+    public void setCurrentItem(int item, boolean smoothScroll) {
+        containerViewPager.setCurrentItem(item, smoothScroll);
     }
 
     public int getCurrentItem() {
