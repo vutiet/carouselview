@@ -438,6 +438,10 @@ public class CarouselView extends FrameLayout {
     public void setCurrentItem(int item) {
         containerViewPager.setCurrentItem(item);
     }
+    
+    public void setCurrentItem(int item, boolean smoothScroll) {
+        containerViewPager.setCurrentItem(item, smoothScroll);
+    }
 
     public int getCurrentItem() {
         return containerViewPager.getCurrentItem();
