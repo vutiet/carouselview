@@ -305,6 +305,13 @@ public class CarouselView extends FrameLayout {
         this.autoPlay = false;
     }
 
+    public boolean isLockScroll() {
+        return containerViewPager.isLockScroll();
+    }
+
+    public void setLockScroll(boolean lockScroll) {
+        this.containerViewPager.setLockScroll(lockScroll);
+    }
 
     private class CarouselPagerAdapter extends PagerAdapter {
         private Context mContext;
