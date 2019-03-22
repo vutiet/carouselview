@@ -137,11 +137,17 @@ public class CarouselView extends FrameLayout {
             }
         }
     }
-    
+
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        swipeTimer.cancel();
+        resetScrollTimer();
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        playCarousel();
     }
 
     public int getSlideInterval() {
@@ -242,15 +248,16 @@ public class CarouselView extends FrameLayout {
     private void setData() {
         CarouselPagerAdapter carouselPagerAdapter = new CarouselPagerAdapter(getContext());
         containerViewPager.setAdapter(carouselPagerAdapter);
-        mIndicator.setViewPager(containerViewPager);
-        mIndicator.requestLayout();
-        mIndicator.invalidate();
-        containerViewPager.setOffscreenPageLimit(getPageCount());
-        playCarousel();
+        if(getPageCount() > 1) {
+            mIndicator.setViewPager(containerViewPager);
+            mIndicator.requestLayout();
+            mIndicator.invalidate();
+            containerViewPager.setOffscreenPageLimit(getPageCount());
+            playCarousel();
+        }
     }
 
     private void stopScrollTimer() {
-
         if (null != swipeTimer) {
             swipeTimer.cancel();
         }
@@ -262,13 +269,12 @@ public class CarouselView extends FrameLayout {
 
 
     private void resetScrollTimer() {
-
         stopScrollTimer();
 
         swipeTask = new SwipeTask();
         swipeTimer = new Timer();
-
     }
+
 
     /**
      * Starts auto scrolling if
@@ -299,6 +305,13 @@ public class CarouselView extends FrameLayout {
         this.autoPlay = false;
     }
 
+    public boolean isLockScroll() {
+        return containerViewPager.isLockScroll();
+    }
+
+    public void setLockScroll(boolean lockScroll) {
+        this.containerViewPager.setLockScroll(lockScroll);
+    }
 
     private class CarouselPagerAdapter extends PagerAdapter {
         private Context mContext;
@@ -442,6 +455,10 @@ public class CarouselView extends FrameLayout {
     public void setCurrentItem(int item) {
         containerViewPager.setCurrentItem(item);
     }
+    
+    public void setCurrentItem(int item, boolean smoothScroll) {
+        containerViewPager.setCurrentItem(item, smoothScroll);
+    }
 
     public int getCurrentItem() {
         return containerViewPager.getCurrentItem();
@@ -460,6 +477,10 @@ public class CarouselView extends FrameLayout {
 
     public int getIndicatorMarginHorizontal() {
         return indicatorMarginHorizontal;
+    }
+    
+    public CarouselViewPager getContainerViewPager() {
+        return containerViewPager;
     }
 
     public void setIndicatorMarginHorizontal(int _indicatorMarginHorizontal) {
