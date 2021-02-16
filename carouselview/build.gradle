@@ -8,12 +8,12 @@ ext {
     libraryName = 'CarouselView'
     artifact = 'carouselview'
 
-    libraryDescription = 'A simple librrary for carousel view'
+    libraryDescription = 'A simple librrary for carousel view, updated for AndroidX'
 
-    siteUrl = 'https://github.com/sayyam/carouselview'
-    gitUrl = 'https://github.com/sayyam/carouselview.git'
+    siteUrl = 'https://github.com/vutiet/carouselview'
+    gitUrl = 'https://github.com/vutiet/carouselview.git'
 
-    libraryVersion = '0.1.6'
+    libraryVersion = '0.1.7'
 
     developerId = 'sayyam'
     developerName = 'Sayyam mehmood'
@@ -30,7 +30,7 @@ android {
     buildToolsVersion '28.0.3'
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode 5
         versionName "0.1.7"
 
