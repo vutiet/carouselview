@@ -4,12 +4,12 @@ package com.synnapps.carouselview;
  * Created by Sayyam on 3/28/16.
  */
 
-import android.support.annotation.IntDef;
-import android.support.v4.view.ViewPager;
-import android.view.View;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import android.view.View;
+import androidx.annotation.IntDef;
+import androidx.viewpager.widget.ViewPager;
 
 /*
  * ViewPager transformation animation invoked when a visible/attached page is scrolled - before

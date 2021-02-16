@@ -1,12 +1,13 @@
 package com.synnapps.carouselview;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,9 +17,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews.RemoteView;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by Sayyam on 11/25/15.
@@ -448,7 +448,7 @@ public class CarouselView extends FrameLayout {
     public void setCurrentItem(int item) {
         containerViewPager.setCurrentItem(item);
     }
-    
+
     public void setCurrentItem(int item, boolean smoothScroll) {
         containerViewPager.setCurrentItem(item, smoothScroll);
     }
@@ -471,7 +471,7 @@ public class CarouselView extends FrameLayout {
     public int getIndicatorMarginHorizontal() {
         return indicatorMarginHorizontal;
     }
-    
+
     public CarouselViewPager getContainerViewPager() {
         return containerViewPager;
     }

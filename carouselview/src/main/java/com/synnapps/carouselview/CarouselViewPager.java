@@ -1,12 +1,12 @@
 package com.synnapps.carouselview;
 
+import java.lang.reflect.Field;
+
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.animation.Interpolator;
-
-import java.lang.reflect.Field;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by Sayyam on 3/28/16.
